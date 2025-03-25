@@ -1,0 +1,54 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+touch "/${DATA_PATH}/${LOGFILE}"
+#Build Parameters
+declare -a params
+params="-D"
+
+
+if [[  ${loadgame} == "false" ]] ;
+then
+  echo "loadgame = false"
+  echo "will create a new game"
+else
+  if [[ ${loadgame} == "true" ]] ;
+  then
+    savegame="${savepath}/${savename}"
+  elif [[  ${loadgame} == "last-autosave" ]] ;
+  then
+    savegame=${savepath}/autosave/`ls -rt ${savepath}/autosave/ | tail -n1`
+  elif [[  ${loadgame} == "exit" ]] ;
+  then
+    savegame="${savepath}/autosave/exit.sav"
+  fi
+
+  echo "using savegame: ${savegame}"
+  FLAGS+=( -g ${savegame} )
+fi
+
+
+for i in ${LOAD_ORDER//,/ }
+do
+  if [ $i == "last"]
+    echo "using last created save game"
+    save_game=${save_path}/autosave/`ls -rt ${savepath}/autosave/ | tail -n1`
+    echo "using: ${save_game}"
+
+  elif [ $i == "auto_save" ]
+  
+  elif [ $i == "exit" ]
+  elif [ $i == "save_file" ]
+  else
+  fi
+    echo "$i"
+done
+
+if [ ! -z "${SAVE_FILE}" ]; then params="${params} -g ${SAVE_FILE}"; fi
+
+if [ ! -z "${SAVE_CONFIG_ON_EXIT}" ]; then params="${params} -x ${SAVE_CONFIG_ON_EXIT}"; fi
+if [ ! -z "${DEBUG}" ]; then params="${params} -d ${DEBUG}"; fi
+
+echo "settigns the following params for the game:"
+echo "${params}"
+printf %s "${params}" > /var/run/s6/container_environment/openttd

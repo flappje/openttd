@@ -6,13 +6,13 @@ updates:
     schedule:
       interval: daily
       time: "08:00"
-      timezone: "Europe/Oslo"
+      timezone: "Europe/Amsterdam"
     open-pull-requests-limit: 10
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "daily"
       time: "08:30"
-      timezone: "Europe/Oslo"
+      timezone: "Europe/Amsterdam"
     open-pull-requests-limit: 10
 

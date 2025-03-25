@@ -1,0 +1,7 @@
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
+
+echo "Starting game"
+exec /usr/games/openttd "${FLAGS[@]}"
+echo "exit"
+exit 0
